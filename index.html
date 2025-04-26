@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Chat</title>
+    <link rel="stylesheet" href="fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme"> <div id="app">
+        <header>
+            <div class="header-left">
+                <button id="menu-toggle" title="Open Menu"><i class="fas fa-bars"></i></button>
+            </div>
+            <div id="chat-controls" class="header-center">
+                <select id="chat-switcher" title="Switch between chats" style="display: none;"></select>
+                 <button id="hide-show-chat-btn" title="Hide/Show Current Chat" style="display: none;"><i class="fas fa-eye-slash"></i> Hide</button>
+                <button id="delete-chat-btn" title="Delete Current Chat" style="display: none;"><i class="fas fa-trash-alt"></i></button>
+                <button id="export-chat-btn" title="Export Current Chat" style="display: none;"><i class="fas fa-file-export"></i></button>
+                <button id="import-chat-btn" title="Import Chat"><i class="fas fa-file-import"></i></button>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;"> </div>
+            <div class="header-right">
+                 <button id="new-chat-btn" title="Create a New Chat"><i class="fas fa-plus"></i> New Chat</button>
+            </div>
+        </header>
+
+        <nav id="sidebar">
+            <button id="close-sidebar-btn" title="Close Menu">&times;</button>
+            <ul>
+                <li><a href="#" id="explanation-link"><i class="fas fa-info-circle"></i> Explanation</a></li>
+                <li><a href="#" id="preferences-link"><i class="fas fa-cog"></i> Preferences</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+            <div id="chat-box-container">
+                <div id="chat-box">
+                    <div class="welcome-message">Select or create a chat to begin.</div>
+                </div>
+            </div>
+
+            <div id="input-area" style="display: none;"> <span id="char-count" title="Character count in the textbox below">0 characters</span>
+                <textarea id="message-input" placeholder="Type your message here..." title="Message Input Area"></textarea>
+                <div class="button-row">
+                    <button id="decrypt-btn" title="Decrypt text in input area"><i class="fas fa-unlock"></i> Decrypt</button>
+                    <button id="encrypt-btn" title="Encrypt text in input area"><i class="fas fa-lock"></i> Encrypt</button>
+                </div>
+            </div>
+        </main>
+
+         <div id="notification-area"></div> </div>
+
+    <div id="modal-overlay"></div>
+
+    <div id="new-chat-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal-btn" title="Close">&times;</span>
+            <h2>Create New Chat</h2>
+            <form id="new-chat-form">
+                <label for="chat-name">Chat Name:</label>
+                <input type="text" id="chat-name" required title="Enter a unique name for the chat">
+
+                <label for="chat-algorithm">Encryption Algorithm:</label>
+                <select id="chat-algorithm" title="Select encryption method">
+                    <option value="Nav Cipher" selected>Nav Cipher</option>
+                    <option value="ChaCha20">ChaCha20</option>
+                    <option value="AES">AES</option>
+                    <option value="RSA">RSA</option>
+                </select>
+
+                <label for="chat-password">Password:</label>
+                <input type="password" id="chat-password" required title="Enter a password for this chat">
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="sms-optimization" title="Optimize for SMS (conceptual)">
+                    <label for="sms-optimization">SMS Optimization</label>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit">Create Chat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="preferences-modal" class="modal">
+         <div class="modal-content">
+            <span class="close-modal-btn" title="Close">&times;</span>
+            <h2>Preferences</h2>
+            <div class="preference-item">
+                <label for="theme-toggle">Theme:</label>
+                <button id="theme-toggle" title="Toggle between dark and light mode">
+                    <i class="fas fa-moon"></i> Light Mode
+                </button>
+            </div>
+             <div class="modal-buttons">
+                 <button type="button" class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+     <div id="explanation-modal" class="modal">
+         <div class="modal-content">
+            <span class="close-modal-btn" title="Close">&times;</span>
+            <h2>Explanation</h2>
+            <p>This application allows you to simulate encrypted chats.</p>
+            <ul>
+                <li>Use the <i class="fas fa-bars"></i> menu for Preferences (theme) and this Explanation.</li>
+                <li>Click '<i class="fas fa-plus"></i> New Chat' to create a chat with specific settings.</li>
+                <li>Select chats using the dropdown menu that appears once chats exist.</li>
+                <li>Use chat controls (<i class="fas fa-eye-slash"></i>/<i class="fas fa-eye"></i>, <i class="fas fa-trash-alt"></i>, <i class="fas fa-file-export"></i>, <i class="fas fa-file-import"></i>) for the active chat.</li>
+                <li>Type messages in the text area and click '<i class="fas fa-lock"></i> Encrypt' to send or '<i class="fas fa-unlock"></i> Decrypt' to simulate receiving and decrypting.</li>
+                <li>Messages have <i class="fas fa-copy"></i> (copy) and <i class="fas fa-trash-alt"></i> (delete) icons.</li>
+                <li>The layout adapts to screen size.</li>
+                 <li>All data is stored temporarily in memory and is lost on refresh/close.</li>
+            </ul>
+             <div class="modal-buttons">
+                 <button type="button" class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmation</h2>
+            <p id="confirmation-message">Are you sure?</p>
+             <div class="modal-buttons">
+                <button id="confirm-cancel-btn" type="button">Cancel</button>
+                <button id="confirm-action-btn" type="button">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+     <div id="password-prompt-modal" class="modal">
+        <div class="modal-content">
+             <span class="close-modal-btn" title="Close">&times;</span>
+            <h2 id="password-prompt-title">Enter Password</h2>
+             <p id="password-prompt-message">Enter the password for this chat:</p>
+            <input type="password" id="password-prompt-input" required>
+             <div class="modal-buttons">
+                <button id="password-prompt-cancel" type="button">Cancel</button>
+                <button id="password-prompt-submit" type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
