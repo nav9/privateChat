@@ -338,12 +338,18 @@ header button:hover {
     margin-right: 5px;
 }
 
-
 #encrypt-btn {
     background-color: var(--accent-color);
 }
 #encrypt-btn:hover {
     background-color: var(--button-hover-bg);
+}
+
+#paste-btn {
+    background-color: #5a5269;    
+}
+#paste-btn:hover {
+    background-color: #6c757d;
 }
 
 #decrypt-btn {

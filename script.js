@@ -745,6 +745,52 @@ $(document).ready(function() {
         }
     });
 
+    // Paste Button
+    $('#paste-btn').on('click', function() {
+        // Check if Clipboard API is available
+        if (!navigator.clipboard || !navigator.clipboard.readText) {
+            showNotification("Clipboard API not supported or permission denied by your browser.", "error");
+            console.warn("Clipboard API (readText) not available.");
+            return;
+        }
+
+        navigator.clipboard.readText()
+            .then(text => {
+                const $messageInput = $('#message-input');
+                const currentVal = $messageInput.val(); // Get current value if you want to append instead of replace
+
+                // Option 1: Replace existing text
+                $messageInput.val(text);
+
+                // Option 2: Append to existing text (Uncomment if preferred)
+                // $messageInput.val(currentVal + text);
+
+                console.log("Text pasted from clipboard.");
+                showNotification("Text pasted.", "success", 1000); // Short notification
+
+                // !! Crucial: Trigger the input event to update the character count !!
+                $messageInput.trigger('input');
+
+                // Optional: Focus the input area and move cursor to the end
+                $messageInput.focus();
+                // Set cursor position to the end of the pasted text
+                const len = $messageInput.val().length;
+                $messageInput[0].selectionStart = len;
+                $messageInput[0].selectionEnd = len;
+
+            })
+            .catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+                // Don't show error if permission was denied, browser usually shows a message.
+                // Show error for other issues.
+                if (err.name !== 'NotAllowedError') {
+                     showNotification('Failed to paste text. Clipboard might be empty or contain non-text content.', 'error');
+                } else {
+                    showNotification('Clipboard permission denied.', 'error');
+                }
+            });
+    });
+
      // Message Actions (Copy/Delete) using Event Delegation
     $('#chat-box').on('click', '.copy-msg-btn', function() {
         const textToCopy = $(this).data('text'); // Retrieve text from data attribute
