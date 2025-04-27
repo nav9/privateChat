@@ -122,7 +122,16 @@ $(document).ready(function() {
         }
     }
     
+    //----------------------------------------------
+    //----------------------------------------------
     // --- Dummy Encryption/Decryption Functions ---
+    //----------------------------------------------
+    //----------------------------------------------
+
+    //----------------------------------------------
+    //--- NAV CIPHER
+    //----------------------------------------------
+    
     const cipherArray = Array.from(
         'abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=~`[]{};:",.<>?/\\'
     );
@@ -143,15 +152,10 @@ $(document).ready(function() {
             let hash = await hashPassword(pwd);
             let nonce = getNonce();
             let cipherMap = new Map();
-            let indicesMap = new Set();
-
-            //console.log("hash: "+hash);
-            //console.log("nonce: "+nonce.toString());
-            
+            let indicesMap = new Set();            
             let i = 0;
             for (let char of cipherArray) {
                 let index = (hash[i % hash.length] % 10) + nonce; // Add nonce to index
-                //console.log("for index: "+index.toString());
                 // Convert 10-35 --> a-z or A-Z
                 if (hash[i % hash.length] >= 97 && hash[i % hash.length] <= 122) {
                     index = (hash[i % hash.length] - 87 + nonce) % cipherArray.length;
@@ -163,7 +167,6 @@ $(document).ready(function() {
                 //console.log(indicesMap);
                 while (indicesMap.has(index)) {                    
                     index = (index + 1) % cipherArray.length;
-                    //console.log("increasing index to: "+index.toString());
                 }
                 indicesMap.add(index);
                 cipherMap.set(char, cipherArray[index]);
@@ -211,14 +214,24 @@ $(document).ready(function() {
         }        
     }
 
-    function encryptChaCha20(text, pwd) { return pwd ? `ChaCha20Encrypted(${text})` : null; }
-    function decryptChaCha20(text, pwd) { return pwd && text.startsWith('ChaCha20Encrypted(') ? text.slice(18, -1) : null; }
+    // function encryptChaCha20(text, pwd) { return pwd ? `ChaCha20Encrypted(${text})` : null; }
+    // function decryptChaCha20(text, pwd) { return pwd && text.startsWith('ChaCha20Encrypted(') ? text.slice(18, -1) : null; }
 
-    function encryptAES(text, pwd) { return pwd ? `AESEncrypted{${text}}` : null; }
-    function decryptAES(text, pwd) { return pwd && text.startsWith('AESEncrypted{') ? text.slice(13, -1) : null; }
+    //----------------------------------------------
+    //--- AES
+    //----------------------------------------------
+    function encryptAES(text, pwd) { 
+        const encrypted = CryptoJS.AES.encrypt(text, pwd);
+        return encrypted.toString();
+    }
+    
+    function decryptAES(text, pwd) { 
+        const decrypted = CryptoJS.AES.decrypt(text, pwd);
+        return decrypted.toString(CryptoJS.enc.Utf8); // Convert from word array to string
+    }
 
-    function encryptRSA(text, pwd) { return pwd ? `RSAEncrypted<${text}>` : null; }
-    function decryptRSA(text, pwd) { return pwd && text.startsWith('RSAEncrypted<') ? text.slice(13, -1) : null; }
+    // function encryptRSA(text, pwd) { return pwd ? `RSAEncrypted<${text}>` : null; }
+    // function decryptRSA(text, pwd) { return pwd && text.startsWith('RSAEncrypted<') ? text.slice(13, -1) : null; }
 
     function encrypt(text, algorithm, password) {
         try {
@@ -226,9 +239,9 @@ $(document).ready(function() {
             console.log(`Encrypting with ${algorithm}...`);
             switch (algorithm) {
                 case 'Nav Cipher': return encryptNavCipher(text, password);
-                case 'ChaCha20': return encryptChaCha20(text, password);
+                //case 'ChaCha20': return encryptChaCha20(text, password);
                 case 'AES': return encryptAES(text, password);
-                case 'RSA': return encryptRSA(text, password);
+                //case 'RSA': return encryptRSA(text, password);
                 default:
                      console.warn(`Unknown encryption algorithm: ${algorithm}`);
                     return null;
@@ -246,9 +259,9 @@ $(document).ready(function() {
             console.log(`Decrypting with ${algorithm}...`);
              switch (algorithm) {
                  case 'Nav Cipher': return decryptNavCipher(text, password);
-                 case 'ChaCha20': return decryptChaCha20(text, password);
+                 //case 'ChaCha20': return decryptChaCha20(text, password);
                  case 'AES': return decryptAES(text, password);
-                 case 'RSA': return decryptRSA(text, password);
+                 //case 'RSA': return decryptRSA(text, password);
                  default:
                     console.warn(`Unknown decryption algorithm: ${algorithm}`);
                     return null;
