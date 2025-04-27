@@ -345,17 +345,17 @@ header button:hover {
     background-color: var(--button-hover-bg);
 }
 
-#paste-btn {
+#decrypt-btn {
     background-color: #5a5269;    
 }
-#paste-btn:hover {
+#decrypt-btn:hover {
     background-color: #6c757d;
 }
 
-#decrypt-btn {
+#paste-btn {
     background-color: #6c757d; /* Secondary button color */
 }
-#decrypt-btn:hover {
+#paste-btn:hover {
     background-color: #5a6268;
 }
 
