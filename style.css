@@ -232,6 +232,14 @@ header button:hover {
     overflow-y: hidden; /* Prevent main scroll, handled by chat-box */
 }
 
+.horizontal-center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
 #chat-box-container {
     width: 100%;
     max-width: 640px; /* Max width for chat */

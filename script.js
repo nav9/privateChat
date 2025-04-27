@@ -389,7 +389,7 @@ $(document).ready(function() {
         if (!chatName || !chats[chatName]) {
              console.warn(`Switch failed: Chat "${chatName}" does not exist.`);
              activeChatName = null;
-             $('#chat-box').empty().append('<div class="welcome-message">Select or create a chat to begin.</div>');
+             $('#chat-box').empty().append('<div class="welcome-message">Use the buttons above to either import a saved chat or create a chat. Use the menu at the top left to view an explanation of how to use this app and to change preferences.</div>');
              $('#input-area').hide();
         } else {
             const chat = chats[chatName];
@@ -853,7 +853,7 @@ $(document).ready(function() {
 
                  renderChatList(); // Update dropdown
                  updateHeaderControls(); // Hide chat-specific buttons
-                 $('#chat-box').empty().append('<div class="welcome-message">Chat deleted. Select or create a chat.</div>');
+                 $('#chat-box').empty().append('<div class="welcome-message">Chat deleted. Import, select or create a chat.</div>');
                  $('#input-area').hide();
                  showNotification(`Chat "${deletedChatName}" deleted successfully.`, 'success');
              } catch (error) {
@@ -1005,7 +1005,7 @@ $(document).ready(function() {
     renderChatList(); // Initial render (likely empty)
     updateHeaderControls(); // Set initial header state
     $('#input-area').hide(); // Start with input hidden
-     $('#chat-box').empty().append('<div class="welcome-message">Select or create a chat to begin.</div>');
+     $('#chat-box').empty().append('<div class="welcome-message">Use the buttons above to either import a saved chat or create a chat. Use the menu at the top left to view an explanation of how to use this app and to change preferences.</div>');
      // Set initial theme button state based on body class
     if ($('body').hasClass('dark-theme')) {
         $('#theme-toggle').html('<i class="fas fa-moon"></i> Light Mode');
