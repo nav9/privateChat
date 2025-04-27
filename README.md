@@ -3,7 +3,7 @@
 # Private Chat
 Run it live [here](https://nav9.github.io/privateChat/index.html).  
   
-Private Chat encrypts text that you want to send to someone via any text sharing platform (email/SMS/messaging apps). It decrypts text received from that someone via any text sharing platform. Both of you have to agree to a secret password (perferably verbally) beforehand to be able to encrypt and decrypt your texts.   
+Private Chat encrypts text that you want to send to someone via any text sharing platform (email/SMS/messaging apps). It decrypts text received from that someone via any text sharing platform. Both of you have to agree to a secret password (perferably verbally) beforehand to be able to encrypt and decrypt your texts. Private Chat is especially useful when someone else has access to your phone and might see your messages.   
   
 Private Chat was created because it would be silly to trust that messages sent via any external server that belongs to any messaging platform is truly end-to-end encrypted and that nobody else can read it. If any data harvesting algorithms are recording the messages and either sharing it with scammers or advertisers, it is worth encrypting messages with Private Chat before sending messages via those messaging apps.  
   
