@@ -1,35 +1,36 @@
 ![Alt text](gallery/PrivateChatExample.png?raw=true "Sample screenshot Private Chat")  
 
+# CAUTION: SENDING PRE-ENCRYPTED TEXT VIA COMMUNICATION SERVICES MIGHT VIOLATE THEIR ACCEPTABLE USE POLICY AND COULD POTENTIALLY GET YOUR ACCOUNT SUSPENDED OR TERMINATED, SO PLEASE DO NOT USE PRIVATE CHAT IN ANY WAY THAT IS ILLEGAL OR THAT COULD VIOLATE TERMS OF SERVICE.
+
 # Private Chat
 Run it live [here](https://nav9.github.io/privateChat/index.html).  
   
-Private Chat encrypts text that you want to send to someone via any text sharing platform (email/SMS/messaging apps). It decrypts text received from that someone via any text sharing platform. Both of you have to agree to a secret password (perferably verbally) beforehand to be able to encrypt and decrypt your texts. Private Chat is especially useful when someone else has access to your phone and might see your messages.   
-  
-Private Chat was created because it would be silly to trust that messages sent via any external server that belongs to any messaging platform is truly end-to-end encrypted and that nobody else can read it. If any data harvesting algorithms are recording the messages and either sharing it with scammers or advertisers, it is worth encrypting messages with Private Chat before sending messages via those messaging apps.  
+Private Chat encrypts and decrypts text using a password. Private Chat is especially useful when you want to protect your notes from anyone who may have access to your computer or phone. Technically you could also encrypt a love letter and write down the encrypted text onto paper.    
   
 Private Chat does not need to be connected to the internet to work. Only if you open the website from "github.io" you need to initially be connected to the internet while the page loads. After that Private Chat works completely offline, and does not have to transmit any data anywhere. You also have the option to simply download this repository and click the `index.html` page to run Private Chat locally. The entire source code is freely available to verify everything that the algorithm does.  
-Private Chat was created when the author noticed that he was receiving advertisements related to the SMS he sent. Since malware or spyware could also eavesdrop, it became necessary to implement some encryption by oneself to protect [data privacy](https://nrecursions.blogspot.com/2018/08/educating-data-privacy-illiterate.html).
-
+  
 # How it works
+You could encrypt and decrypt your own notes, but if you need to share notes with a friend...
 1. You and your friend decide on a password or passphrase.  
 2. You and your friend open Private Chat on your respective web browsers, start a new chat and enter the password or passphrase.  
 3. You type a message in Private Chat and encrypt it.  
-4. Copy the encrypted text from Private Chat and paste it into any other text sharing platform (email/SMS/messaging apps) which you use to chat with your friend.  
+4. Copy the encrypted text from Private Chat and share it with your friend.  
 5. Your friend receives the encrypted text, copies it, pastes it into their Private Chat and decrypts the text to read it.  
-6. Your friend types a reply in Private Chat, encrypts it, copies the encrypted text and pastes it into the text sharing platform.  
+6. Your friend types a reply in Private Chat, encrypts it, copies the encrypted text and shares it with you.  
 7. You receive the message, copy the encrypted text, paste it into Private Chat and decrypt it to read it.  
   
 # Tips
 * Instead of passwords, it's better to use passphrases.  
 * Decide on a passphrase like `iwentforalongwalktoday@4` and then for the sake of variation, you and your friend can agree to add the current date to it like `iwentforalongwalktoday@427April2025`. If you aren't too particular, you could always use a short password.  
-* To avoid copy-paste fatigue, instead of encrypting and decrypting all your messages, do it only for a few of them that you really want to keep private.  
+* To avoid copy-paste fatigue, instead of encrypting and decrypting all your text, do it only for a bit of it that you really want to keep private.  
   
 # Encryption algorithms available
-* `Nav Cipher`: I had to create this cipher because existing ciphers were either too simple or created a cipher text which was much longer than the original text, which made it difficult to fit text into an SMS. It basically creates a SHA hash and uses the numbers in the hash as indices for the cipher with the addition of a two digit nonce (pseudo-random number). It's a simple cipher that could easily be cracked by an expert in cryptography, but the objective here was merely to deter data harvesting algorithms. Only standard keyboard characters get encrypted. Use AES if you are using unicode characters.     
-* `AES (Advanced Encryption Standard)`: This is a well known symmetric key algorithm which is supposed to be secure. It is invoked from the CryptoJS library. This algorithm can be used for chats if data privacy is really crucial.  
+* `Nav Cipher`: I had to create this cipher because existing ciphers were either too simple or created a cipher text which was much longer than the original text. It basically creates a SHA hash and uses the numbers in the hash as indices for the cipher with the addition of a two digit nonce (pseudo-random number). It's a simple cipher that could easily be cracked by an expert in cryptography. Only standard keyboard characters get encrypted. Use AES if you are using unicode characters.     
+* `AES (Advanced Encryption Standard)`: This is a well known symmetric key algorithm which is supposed to be secure. It is invoked from the CryptoJS library. This algorithm can be used when data privacy is really crucial.  
   
 # TODO  
 * Adding support for sending and receiving encrypted images.  
+* Adding support for a word cipher.  
     
 # Fonts and icons
 Downloaded from [Fonts Awesome](https://docs.fontawesome.com/web/setup/host-yourself/webfonts) website.  
