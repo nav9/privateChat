@@ -104,28 +104,28 @@
          <div class="modal-content">
             <span class="close-modal-btn" title="Close">&times;</span>
             <h1 style="text-align: center">Explanation</h1>
-            <p>To keep your communication truly private, this app allows you to encrypt and decrypt messages before sending or receiving them via email, SMS or any other messaging app. Private Chat is especially useful when someone else has access to your phone and might see your messages.</p>
-            <h2>Encryption algorithms available</h2>
+            <p>To keep your personal text private, this app allows you to encrypt and decrypt text. Private Chat is especially useful when someone else has access to your computer or phone and might see your notes.</p>
+            <h2>CAUTION: SENDING PRE-ENCRYPTED TEXT VIA COMMUNICATION SERVICES MIGHT VIOLATE THEIR ACCEPTABLE USE POLICY AND COULD POTENTIALLY GET YOUR ACCOUNT SUSPENDED OR TERMINATED, SO PLEASE DO NOT USE PRIVATE CHAT IN ANY WAY THAT IS ILLEGAL OR THAT COULD VIOLATE TERMS OF SERVICE.</h2>
+            <hr>
+             <br>
+             <h2>Encryption algorithms available</h2>
             <ul>
-                <li><b>Nav cipher:</b> Created for SMS since other algorithms were too simple or produced very long encrypted text. This cipher produces text that is two characters longer than the original text due to a two digit nonce. This is a custom built cipher that has not been audited, so it could easily be cracked by a professional cryptographer. However, it could provide a basic level of privacy from data mining algorithms. Only standard keyboard characters get encrypted.</li>
+                <li><b>Nav cipher:</b> Created since other algorithms were too simple or produced very long encrypted text. This cipher produces text that is two characters longer than the original text due to a two digit nonce. This is a custom built cipher that has not been audited, so it could easily be cracked by a professional cryptographer. Only standard keyboard characters get encrypted.</li>
                 <li><b>AES:</b> Much more secure than the Nav cipher. AES is an encryption algorithm trusted by the industry. Used here by invoking the CryptoJS library.</li>
             </ul>
             <h2>How to use Private Chat</h2>
             <ul>
-                <li>Your friend and you decide on an encryption algorithm and password/passphrase on Private Chat. Do not share the password across any messaging app. Communicate it verbally or in some secret way. </li>
-                <li>Both of you start a new chat on your devices. Type some text and click the Encrypt button. Click the Copy icon near the encrypted message that appears.</li>
-                <li>Paste the encrypted text into any messaging app of your choice and send it to your friend.</li>
-                <li>Your friend copies the received message and pastes it into their Private Chat using the Paste button and clicks the Decrypt button.</li>
+                <li>Decide on an encryption algorithm and password/passphrase on Private Chat. </li>
+                <li>Start a new chat in Private Chat. Type some text and click the Encrypt button. Click the Copy icon near the encrypted message that appears.</li>
+                <li>Paste the encrypted message into the same or different instance of Private Chat using the Paste button and click the Decrypt button.</li>
             </ul>
             <h2>Features</h2>
             <ul>
                 <li>You can start multiple chats and switch between chats using a dropdown menu at the top of the screen.</li>
-                <li>You can hide chats and show them by typing the chat password.</li>
+                <li>You can hide chats and show them by typing the chat password. However, a JavaScript expert would be able to use programmer tools and access the text if they have access to the browser where the chats are stored.</li>
                 <li>All data is stored temporarily in memory and is lost on page refresh/close. If you need to save/load chats, use the Export/Import options. Passwords will not be saved to storage.</li>
                 <li>Private Chat does not transmit any data anywhere without your knowledge. The source code is freely available <a href="https://github.com/nav9/privateChat" target="_blank">here.</a> and you can run it live <a href="https://nav9.github.io/privateChat/index.html" target="_blank">here</a>.</li>
             </ul>
-            <p>To avoid the fatigue of copying and pasting, use Private Chat only to encrypt a few messages you really want to keep private.</p>
-            <p>If you'd like to say thank you, you can do it <a href="https://nrecursions.blogspot.com/2020/08/" target="_blank">here</a>.</p>
              <div class="modal-buttons">
                  <button type="button" class="close-btn horizontal-center">Close</button>
             </div>
