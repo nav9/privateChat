@@ -218,6 +218,115 @@ $(document).ready(function() {
     // function decryptChaCha20(text, pwd) { return pwd && text.startsWith('ChaCha20Encrypted(') ? text.slice(18, -1) : null; }
 
     //----------------------------------------------
+    //--- Custom Caesar cipher
+    //----------------------------------------------
+    // --- Helper Function for Caesar Cipher Offsets ---
+    function getCaesarCipherOffsets(password) {
+        let passwordAsciiSum = 0;
+        for (let i = 0; i < password.length; i++) {
+            passwordAsciiSum += password.charCodeAt(i);
+        }
+
+        let offsetUpper = passwordAsciiSum % 26;
+        if (offsetUpper === 0) {
+            offsetUpper = 1; // Ensure offset is at least 1
+        }
+
+        // Separate offsets are needed for small and capital, implying the sum is re-evaluated or used the same way.
+        // If it meant an independent sum based on properties of lowercase chars in password, the logic would differ.
+        // Assuming the same sum applies its modulo logic independently.
+        let offsetLower = passwordAsciiSum % 26;
+        if (offsetLower === 0) {
+            offsetLower = 1;
+        }
+
+        let offsetDigit = passwordAsciiSum % 10;
+        if (offsetDigit === 0) {
+            offsetDigit = 1;
+        }
+        // console.log(`Caesar Offsets: Upper=${offsetUpper}, Lower=${offsetLower}, Digit=${offsetDigit} from Sum=${passwordAsciiSum}`);
+        return { offsetUpper, offsetLower, offsetDigit };
+    }
+
+
+    /**
+     * Encrypts text using the custom Caesar cipher.
+     * - Uppercase letters (A-Z) are shifted.
+     * - Lowercase letters (a-z) are shifted independently.
+     * - Digits (0-9) are shifted.
+     * - Other characters remain unchanged.
+     * @param {string} text - The plaintext to encrypt.
+     * @param {string} pwd - The password to derive the shift amount.
+     * @returns {string|null} The encrypted text, or null if input is invalid.
+     */
+    function encryptCaesarCipher(text, pwd) {
+        if (typeof text !== 'string' || typeof pwd !== 'string' || pwd.length === 0) {
+            console.error("Caesar Encrypt: Invalid input text or password.");
+            return null;
+        }
+        try {
+            const { offsetUpper, offsetLower, offsetDigit } = getCaesarCipherOffsets(pwd);
+            let encryptedText = "";
+
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                let charCode = text.charCodeAt(i);
+
+                if (charCode >= 65 && charCode <= 90) { // Uppercase A-Z
+                    char = String.fromCharCode(((charCode - 65 + offsetUpper) % 26) + 65);
+                } else if (charCode >= 97 && charCode <= 122) { // Lowercase a-z
+                    char = String.fromCharCode(((charCode - 97 + offsetLower) % 26) + 97);
+                } else if (charCode >= 48 && charCode <= 57) { // Digits 0-9
+                    char = String.fromCharCode(((charCode - 48 + offsetDigit) % 10) + 48);
+                }
+                // Other characters (including spaces, symbols) remain unchanged
+                encryptedText += char;
+            }
+            return encryptedText;
+        } catch (error) {
+            console.error("Error during Caesar encryption:", error);
+            return null;
+        }
+    }
+
+    /**
+     * Decrypts text encrypted with the custom Caesar cipher.
+     * @param {string} text - The encrypted text.
+     * @param {string} pwd - The password used for encryption.
+     * @returns {string|null} The decrypted plaintext, or null if input is invalid.
+     */
+    function decryptCaesarCipher(text, pwd) {
+        if (typeof text !== 'string' || typeof pwd !== 'string' || pwd.length === 0) {
+            console.error("Caesar Decrypt: Invalid input text or password.");
+            return null;
+        }
+        try {
+            const { offsetUpper, offsetLower, offsetDigit } = getCaesarCipherOffsets(pwd);
+            let decryptedText = "";
+
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                let charCode = text.charCodeAt(i);
+
+                if (charCode >= 65 && charCode <= 90) { // Uppercase A-Z
+                    // Ensure positive result before modulo for decryption
+                    char = String.fromCharCode(((charCode - 65 - offsetUpper + 26) % 26) + 65);
+                } else if (charCode >= 97 && charCode <= 122) { // Lowercase a-z
+                    char = String.fromCharCode(((charCode - 97 - offsetLower + 26) % 26) + 97);
+                } else if (charCode >= 48 && charCode <= 57) { // Digits 0-9
+                    char = String.fromCharCode(((charCode - 48 - offsetDigit + 10) % 10) + 48);
+                }
+                // Other characters remain unchanged
+                decryptedText += char;
+            }
+            return decryptedText;
+        } catch (error) {
+            console.error("Error during Caesar decryption:", error);
+            return null;
+        }
+    }
+
+    //----------------------------------------------
     //--- AES
     //----------------------------------------------
     function encryptAES(text, pwd) { 
@@ -239,6 +348,7 @@ $(document).ready(function() {
             console.log(`Encrypting with ${algorithm}...`);
             switch (algorithm) {
                 case 'Nav Cipher': return encryptNavCipher(text, password);
+                case 'Caesar Cipher': return encryptCaesarCipher(text, password); 
                 //case 'ChaCha20': return encryptChaCha20(text, password);
                 case 'AES': return encryptAES(text, password);
                 //case 'RSA': return encryptRSA(text, password);
@@ -259,6 +369,7 @@ $(document).ready(function() {
             console.log(`Decrypting with ${algorithm}...`);
              switch (algorithm) {
                  case 'Nav Cipher': return decryptNavCipher(text, password);
+                 case 'Caesar Cipher': return decryptCaesarCipher(text, password);
                  //case 'ChaCha20': return decryptChaCha20(text, password);
                  case 'AES': return decryptAES(text, password);
                  //case 'RSA': return decryptRSA(text, password);

@@ -64,6 +64,7 @@
                 <label for="chat-algorithm">Encryption Algorithm:</label>
                 <select id="chat-algorithm" title="Select encryption method">
                     <option value="Nav Cipher" selected>Nav Cipher</option>
+                    <option value="Caesar Cipher">Caesar Cipher</option>
                     <!-- <option value="ChaCha20">ChaCha20</option> -->
                     <option value="AES">AES</option>
                 </select>
@@ -105,13 +106,14 @@
             <span class="close-modal-btn" title="Close">&times;</span>
             <h1 style="text-align: center">Explanation</h1>
             <p>To keep your personal text private, this app allows you to encrypt and decrypt text. Private Chat is especially useful when someone else has access to your computer or phone and might see your notes.</p>
-            <h2>CAUTION: SENDING PRE-ENCRYPTED TEXT VIA COMMUNICATION SERVICES MIGHT VIOLATE THEIR ACCEPTABLE USE POLICY AND COULD POTENTIALLY GET YOUR ACCOUNT SUSPENDED OR TERMINATED, SO PLEASE DO NOT USE PRIVATE CHAT IN ANY WAY THAT IS ILLEGAL OR THAT COULD VIOLATE TERMS OF SERVICE.</h2>
+            <h3>CAUTION: SENDING PRE-ENCRYPTED TEXT VIA COMMUNICATION SERVICES MIGHT VIOLATE THEIR ACCEPTABLE USE POLICY AND COULD POTENTIALLY GET YOUR ACCOUNT SUSPENDED OR TERMINATED, SO PLEASE DO NOT USE PRIVATE CHAT IN ANY WAY THAT IS ILLEGAL OR THAT COULD VIOLATE TERMS OF SERVICE OF ANY COMMUNICATION SERVICE. One does wonder whether services that promise end-to-end encryption (where they claim that even they can't read your messages), would really have a problem with messages that are pre-encrypted (how would they know that the message you are sending is pre-encrypted by you, unless they can actually intercept it, decrypt it and read/analyze it?).</h3>
             <hr>
              <br>
              <h2>Encryption algorithms available</h2>
             <ul>
                 <li><b>Nav cipher:</b> Created since other algorithms were too simple or produced very long encrypted text. This cipher produces text that is two characters longer than the original text due to a two digit nonce. This is a custom built cipher that has not been audited, so it could easily be cracked by a professional cryptographer. Only standard keyboard characters get encrypted.</li>
-                <li><b>AES:</b> Much more secure than the Nav cipher. AES is an encryption algorithm trusted by the industry. Used here by invoking the CryptoJS library.</li>
+                <li><b>Caesar cipher:</b> This cipher can easily be decrypted. It was only meant to have an encryption mechanism that kept text garbled enough to prevent annoying algorithms from analyzing the contents of messages and sending advertisements based on it. The password you type is used to generate the offset required to perform the encryption and decryption.  </li>                
+                <li><b>AES:</b> Much more secure than the Nav cipher. AES is an encryption algorithm trusted by the industry. Used here by invoking the CryptoJS library.</li>                
             </ul>
             <h2>How to use Private Chat</h2>
             <ul>

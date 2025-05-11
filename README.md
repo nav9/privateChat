@@ -1,9 +1,9 @@
 ![Alt text](gallery/PrivateChatExample.png?raw=true "Sample screenshot Private Chat")  
 
-## CAUTION: SENDING PRE-ENCRYPTED TEXT VIA COMMUNICATION SERVICES MIGHT VIOLATE THEIR ACCEPTABLE USE POLICY AND COULD POTENTIALLY GET YOUR ACCOUNT SUSPENDED OR TERMINATED, SO PLEASE DO NOT USE PRIVATE CHAT IN ANY WAY THAT IS ILLEGAL OR THAT COULD VIOLATE TERMS OF SERVICE.
+### CAUTION: SENDING PRE-ENCRYPTED TEXT VIA COMMUNICATION SERVICES MIGHT VIOLATE THEIR ACCEPTABLE USE POLICY AND COULD POTENTIALLY GET YOUR ACCOUNT SUSPENDED OR TERMINATED, SO PLEASE DO NOT USE PRIVATE CHAT IN ANY WAY THAT IS ILLEGAL OR THAT COULD VIOLATE TERMS OF SERVICE OF ANY COMMUNICATION SERVICE. One does wonder whether services that promise end-to-end encryption (where they claim that even they can't read your messages), would really have a problem with messages that are pre-encrypted (how would they know that the message you are sending is pre-encrypted by you, unless they can actually intercept it, decrypt it and read/analyze it?).
 
 # Private Chat
-Run it live [here](https://nav9.github.io/privateChat/index.html).  
+Run Private Chat live [here](https://nav9.github.io/privateChat/index.html).  
   
 Private Chat encrypts and decrypts your private text using a password. Private Chat is especially useful when you want to protect your notes from anyone who may have access to your computer or phone. Technically you could also encrypt a love letter to someone you love and write down the encrypted text onto paper.    
 Private Chat does not need to be connected to the internet to work. Only if you open the website from "github.io" you need to initially be connected to the internet while the page loads. After that Private Chat works completely offline, and does not have to transmit any data anywhere. You also have the option to simply download this repository and click the `index.html` page to run Private Chat locally. The entire source code is freely available to verify everything that the algorithm does.  
@@ -25,11 +25,12 @@ You could encrypt and decrypt your own notes, but if you need to share notes wit
   
 # Encryption algorithms available
 * `Nav Cipher`: I had to create this cipher because existing ciphers were either too simple or created a cipher text which was much longer than the original text. It basically creates a SHA hash and uses the numbers in the hash as indices for the cipher with the addition of a two digit nonce (pseudo-random number). It's a simple cipher that could easily be cracked by an expert in cryptography. Only standard keyboard characters get encrypted. Use AES if you are using unicode characters.     
+* `Caesar Cipher`: This cipher can easily be decrypted. It was only meant to have an encryption mechanism that kept text garbled enough to prevent annoying algorithms from analyzing the contents of messages and sending advertisements based on it. The password you type is used to generate the offset required to perform the encryption and decryption. The offset for letters and numbers is different.  
 * `AES (Advanced Encryption Standard)`: This is a well known symmetric key algorithm which is supposed to be secure. It is invoked from the CryptoJS library. This algorithm can be used when data privacy is really crucial.  
   
 # TODO  
-* Adding support for sending and receiving encrypted images.  
-* Adding support for a full-word cipher.  
+* Adding support for sending and receiving encrypted images using base64, and support for resizing images before encrypting them.  
+* Adding support for a full-word cipher, where entire words are substituted for other words.  
     
 # External
 * Fonts and icons were downloaded from [Fonts Awesome](https://docs.fontawesome.com/web/setup/host-yourself/webfonts) website.  
